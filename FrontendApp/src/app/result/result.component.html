@@ -1,0 +1,29 @@
+<header>
+    <h2>Result</h2>
+</header>
+<div *ngIf="response">
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Student Id</th>
+          <th>Student Name</th>
+          <th>Student DOB</th>
+          <th>Subject 1</th>
+          <th>Subject 2</th>
+          <th>Subject 3</th>
+          <th>Subject 4</th>
+          <th>Subject 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of response.data" class="result-row">
+          <td *ngFor="let key of getObjectKeys(obj)">
+            {{ obj[key] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <a routerLink="/student-login">Back</a>
+  <a routerLink="/">Home</a>

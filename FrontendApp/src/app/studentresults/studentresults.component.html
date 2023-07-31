@@ -1,0 +1,109 @@
+<header>
+    <h2>Result Management</h2>
+</header>
+<div *ngIf="response">
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Result Id</th>
+          <th>Student Id</th>
+          <th>Subject 1</th>
+          <th>Subject 2</th>
+          <th>Subject 3</th>
+          <th>Subject 4</th>
+          <th>Subject 5</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of response.data" class="result-row">
+          <td *ngFor="let key of getObjectKeys(obj)">
+            {{ obj[key] }}
+          </td>
+          <td>
+            <button class="edit-button" (click)="showEditResultForm=true;getStudentId(obj['student_id']);scroll(target)">Edit</button>
+            <button class="delete-button" (click)="deleteStudent(obj['student_id'])">Delete</button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button (click)="showAddResultForm = true;scroll(target)">Add Result</button>
+  <a routerLink="/teacher-login">Logout</a>
+  
+  
+  <div #target>
+  <div *ngIf="showAddResultForm" class="form-container">
+    <h3>Add Student Result</h3>
+    <table id="tab">
+      <tr>
+        <td><label>Result ID:</label></td>
+        <td><input type="text" name="resultId" [(ngModel)]="newResult.result_id"></td>
+      </tr>
+      <tr>
+        <td><label>Student ID:</label></td>
+        <td><input type="text" name="studentId" [(ngModel)]="newResult.student_id"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 1:</label></td>
+        <td><input type="text" name="subject1" [(ngModel)]="newResult.subject1"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 2:</label></td>
+        <td><input type="text" name="subject2" [(ngModel)]="newResult.subject2"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 3:</label></td>
+        <td><input type="text" name="subject3" [(ngModel)]="newResult.subject3"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 4:</label></td>
+        <td><input type="text" name="subject4" [(ngModel)]="newResult.subject4"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 5:</label></td>
+        <td><input type="text" name="subject5" [(ngModel)]="newResult.subject5"></td>
+      </tr>
+    </table>
+    <br>
+    <button type="submit" (click)="addStudentResult()">Submit</button>
+    <button type="submit" (click)="showAddResultForm = false">Close</button>
+  </div>
+</div>
+
+
+<div #target>
+  <div *ngIf="showEditResultForm" class="form-container" >
+    <h3>Edit Student Result</h3>
+    <table id="tab">
+      <tr>
+        <td><label>Student ID:</label></td>
+        <td><input type="text" name="studentId" value={{student_id}} disabled></td>
+      </tr>
+      <tr>
+        <td><label>Subject 1:</label></td>
+        <td><input type="text" name="subject1" [(ngModel)]="editResult.subject1"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 2:</label></td>
+        <td><input type="text" name="subject2" [(ngModel)]="editResult.subject2"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 3:</label></td>
+        <td><input type="text" name="subject3" [(ngModel)]="editResult.subject3"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 4:</label></td>
+        <td><input type="text" name="subject4" [(ngModel)]="editResult.subject4"></td>
+      </tr>
+      <tr>
+        <td><label>Subject 5:</label></td>
+        <td><input type="text" name="subject5" [(ngModel)]="editResult.subject5"></td>
+      </tr>
+    </table>
+    <br>
+    <button type="submit" (click)="editStudent(student_id)">Submit</button>
+    <button type="submit" (click)="showEditResultForm = false">Close</button>
+  </div>
+</div>
